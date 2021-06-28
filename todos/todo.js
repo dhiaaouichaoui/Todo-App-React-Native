@@ -14,6 +14,24 @@ export default class Todos extends React.Component{
             todos:[],
             text:""
         }
+    } 
+    //Add some text to the todo list
+    addTodo() {
+        if (this.state.text) {
+            var date = new Date();
+
+            this.state.noteArray.push({
+               'date' : date.getFullYear()+
+               '/' +(date.getMonth() + 1)+
+               '/' + date.getDate(),
+               'text':this.state.text
+            });
+
+          
+            this.setState({todos: this.state.todos});
+            this.setState({text:this.state.text});
+        }
+
     }
     render() {
         return (
@@ -29,7 +47,8 @@ export default class Todos extends React.Component{
                 <View style={styles.footer}>
                     <TextInput
                         style={styles.textInput}
-                        
+                        onChangeText={(text) => this.setState({ text })}
+                        value={this.state.text}
                         placeholder='Task'
                         placeholderTextColor='white'
                         underlineColorAndroid='transparent'>
